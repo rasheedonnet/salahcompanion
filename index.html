@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Salah Companion</title>
+    </head>
+    <body>
+        <div id="salah-niyath">Wait 10 seconds</div>
+        <div id="one-fathiha">Fathiha</div>
+        <div id="one-surah">
+            <p>Surah-Yaseen</p>
+            <p>From aya 1</p>
+            <p>To aya 5</p>
+        </div>
+        <div id="salah-ruku-sujud">Wait 30 seconds</div>
+        <div id="two-fathiha"></div>
+        <div id="two-surah">
+                <p>Surah Al-Qadar</p>
+                <p>From aya 1</p>
+                <p>To aya 5</p>
+        </div>
+        <div>
+        <button onclick="beginSalah()" type="button">Play</button>
+        </div>
+
+        <script>
+            var myAudio = document.createElement('audio');
+            var audioSourceBaseUrl = 'https://everyayah.com/data/Abdul_Basit_Murattal_64kbps/';
+            function beginSalah() { 
+                i = 0;
+                var playlist = new Array('001000.mp3', '001001.mp3', '001002.mp3','001003.mp3','001004.mp3','001005.mp3','001006.mp3','001007.mp3');
+
+                myAudio.addEventListener('ended', function () {
+                    i = ++i;
+                    if(i == playlist.length){
+                        myAudio.pause();
+                        return;
+                    }
+                    console.log(i)
+                    myAudio.src = audioSourceBaseUrl + playlist[i];
+                    myAudio.play();
+                }, true);
+                myAudio.loop = false;
+                myAudio.src = audioSourceBaseUrl + playlist[0];
+                myAudio.play();
+            } 
+            function playAudio(sourceFile)
+            {
+                myAudio.setAttribute('src',sourceFile);
+                myAudio.play(); 
+            }
+        </script>
+    </body>
+</html>
