@@ -65,11 +65,12 @@ window.onload = function(){
             niyathTime.append($('<option></option>').attr('value', i).text(i));
         }
 
-        // Populate dropdown with list of provinces
+        // Populate dropdown with list of suras
         $.getJSON(surahJson, function (data) {
             $.each(data.quran.suras.sura, function (key, entry) {
-                firstSurahSelect.append($('<option></option>').attr('value', entry.index).text(entry.tname));
-                secondSurahSelect.append($('<option></option>').attr('value', entry.index).text(entry.tname));
+                var displaySurah = entry.index + '.' + entry.tname + ' (' + entry.name + ')';
+                firstSurahSelect.append($('<option></option>').attr('value', entry.index).text(displaySurah));
+                secondSurahSelect.append($('<option></option>').attr('value', entry.index).text(displaySurah));
             })
         });
     }
