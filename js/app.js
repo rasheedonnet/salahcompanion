@@ -1,6 +1,5 @@
 window.onload = function(){
-    var myAudio = document.createElement('audio');
-    var audioSourceBaseUrl = 'https://everyayah.com/data/';
+    
     const surahJson = 'data/surah.json';
 
     let firstSurahSelect = $('#first-surah-list');
@@ -16,12 +15,14 @@ window.onload = function(){
     initializePage();
 
     beginSalah = function() { 
+        var myAudio = document.createElement('audio');
+        var audioSourceBaseUrl = 'https://everyayah.com/data/';
+
         $('#beginSalahBtn').prop('disabled', true);
         audioSourceBaseUrl = audioSourceBaseUrl + recitation.val() + "/";
         var playlist = createPlaylist();
         i = 0;
-        //var playlist = new Array('001000.mp3', 'audio/500MilSecSilence.mp3','001001.mp3', '001002.mp3','001003.mp3','001004.mp3','001005.mp3','001006.mp3','001007.mp3');
-
+        
         myAudio.addEventListener('ended', function () {
             i = ++i;
             if(i == playlist.length){
@@ -30,7 +31,7 @@ window.onload = function(){
                 return;
             }
             
-            console.log(i)
+            console.log(playlist[i])
             if(playlist[i].includes("/")>0){
                 myAudio.src = playlist[i];
             }
@@ -62,7 +63,7 @@ window.onload = function(){
         niyathTime.empty();
         rukuTime.empty();
 
-        for(i=1;i<=20;i++){
+        for(i=1;i<=60;i++){
             rukuTime.append($('<option></option>').attr('value', i).text(i));
             niyathTime.append($('<option></option>').attr('value', i).text(i));
         }
@@ -84,7 +85,7 @@ window.onload = function(){
             firstSurahSelectTo.empty();
             $.each(data.quran.suras.sura, function (key, entry) {
                 if(entry.index == $("#first-surah-list").val()){
-                    for(i=1;i<entry.ayas;i++){
+                    for(i=1;i<=entry.ayas;i++){
                         firstSurahSelectFrom.append($('<option></option>').attr('value', i).text(i));
                         firstSurahSelectTo.append($('<option></option>').attr('value', i).text(i));
                     }
@@ -102,7 +103,7 @@ window.onload = function(){
             secondSurahSelectTo.empty();
             $.each(data.quran.suras.sura, function (key, entry) {
                 if(entry.index == $("#second-surah-list").val()){
-                    for(i=1;i<entry.ayas;i++){
+                    for(i=1;i<=entry.ayas;i++){
                         secondSurahSelectFrom.append($('<option></option>').attr('value', i).text(i));
                         secondSurahSelectTo.append($('<option></option>').attr('value', i).text(i));
                     }
