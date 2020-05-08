@@ -16,6 +16,7 @@ window.onload = function(){
     initializePage();
 
     beginSalah = function() { 
+        $('#beginSalahBtn').prop('disabled', true);
         audioSourceBaseUrl = audioSourceBaseUrl + recitation.val() + "/";
         var playlist = createPlaylist();
         i = 0;
@@ -25,6 +26,7 @@ window.onload = function(){
             i = ++i;
             if(i == playlist.length){
                 myAudio.pause();
+                $('#beginSalahBtn').prop('disabled', false);
                 return;
             }
             
